@@ -1,9 +1,9 @@
-import datetime
-
 import requests as requests
+import htmlparser
 
 SESSION = requests.Session()
 ENDPOINT = "https://en.wikipedia.org/w/api.php"
+ENDPOINT2 = "https://commons.wikimedia.org/w/api.php"
 
 
 def fetch_potd(current_date):
@@ -23,12 +23,12 @@ def fetch_potd(current_date):
     filename = data["query"]["pages"][0]["images"][0]["title"]
     # print(filename)
     image_page_url = "https://en.wikipedia.org/wiki/" + title
-
     image_data = {
         "filename": filename,
         "image_page_url": image_page_url,
         "image_src": fetch_image_src(filename),
-        "date": date_i
+        "date": date_i,
+        "blurb": fetch_potd_blurb(filename)
     }
 
     return image_data
@@ -53,6 +53,24 @@ def fetch_image_src(filename):
     image_url = image_info["url"]
     make_picture_resolution_1920(image_url)
     return image_url
+
+
+def fetch_potd_blurb(filename):
+
+    params = {
+        "action": "query",
+        "format": "json",
+        "formatversion": "2",
+        "prop": "imageinfo",
+        "iiprop": "extmetadata",
+        "titles": filename
+    }
+
+    response = SESSION.get(url=ENDPOINT2, params=params)
+    data = response.json()
+    description_raw = data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]["ImageDescription"]["value"]
+    description = htmlparser.strip_tags(description_raw)
+    return description
 
 
 def make_picture_resolution_1920(url):

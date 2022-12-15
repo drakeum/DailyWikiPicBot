@@ -1,8 +1,9 @@
 import discord
 import potdfunctions as pf
 from discord.ext import commands
-from datetime import date, timedelta
+from datetime import date
 import os
+import currentimagedata as cid
 from dotenv import load_dotenv
 
 CURRENT_DATE = date.today()
@@ -25,14 +26,14 @@ def run_bot():
 
     @bot.tree.command(name="daily")
     async def daily(interaction: discord.Interaction):
-        data = pf.fetch_potd(CURRENT_DATE)
-        image_url = data['image_src']
-        image_url_comp = pf.make_picture_resolution_1920(image_url)
-        print("Fetched image: " + image_url_comp)
+        page_url = cid.page_url
+        image_url_comp = cid.image_url_comp
+        blurb = cid.blurb
+        print("Daily command called, stored image being displayed: " + image_url_comp)
 
         embed = discord.Embed(title="Wikipedia Picture of the Day",
-                              url=image_url,
-                              description="test",
+                              url=page_url,
+                              description=blurb,
                               color=0xFF5733, )
         embed.set_image(url=image_url_comp)
         await interaction.response.send_message(embed=embed)
