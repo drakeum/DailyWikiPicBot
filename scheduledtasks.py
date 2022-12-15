@@ -1,5 +1,4 @@
-import schedule
-from datetime import date
+from datetime import date, datetime
 import currentimagedata as cid
 import potdfunctions as pf
 
@@ -13,6 +12,6 @@ def store_new_potd():
     cid.page_url = data["image_page_url"]
     cid.image_url_comp = pf.make_picture_resolution_1920(image_url)
     cid.blurb = data['blurb']
-    print("A new daily image has been fetched and stored!")
-
-schedule.every().day.at("12:00").do(store_new_potd)
+    print(
+        "A new daily image has been fetched and stored! Current time: " + CURRENT_DATE.isoformat() + " " + datetime.now().strftime(
+            "%H:%M:%S"))

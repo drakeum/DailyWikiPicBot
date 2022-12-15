@@ -5,6 +5,10 @@ from datetime import date
 import os
 import currentimagedata as cid
 from dotenv import load_dotenv
+import scheduledtasks as st
+import schedule
+import time
+
 
 CURRENT_DATE = date.today()
 
@@ -21,6 +25,12 @@ def run_bot():
         try:
             synced = await bot.tree.sync()
             print(f"Synced {len(synced)} command(s)")
+            st.store_new_potd()
+            schedule.every().day.at("12:00").do(st.store_new_potd)
+            while True:
+                print("Tick")
+                schedule.run_pending()
+                time.sleep(45)
         except Exception as e:
             print(e)
 
