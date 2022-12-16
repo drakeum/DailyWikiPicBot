@@ -56,8 +56,8 @@ def run_bot():
         except Exception as e:
             print(e)
 
-    @bot.tree.command(name="daily")
-    async def daily(interaction: discord.Interaction):
+    @bot.hybrid_command(name="daily", description="Shows today's Wikipedia daily picture.")
+    async def daily(ctx: commands.Context):
         page_url = cid.page_url
         image_url_comp = cid.image_url_comp
         blurb = cid.blurb
@@ -68,6 +68,6 @@ def run_bot():
                               description=blurb,
                               color=0xff8585, )
         embed.set_image(url=image_url_comp)
-        await interaction.response.send_message(embed=embed)
+        await ctx.reply(embed=embed)
 
     bot.run(TOKEN)
