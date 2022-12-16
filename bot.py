@@ -9,7 +9,7 @@ import scheduledtasks as st
 
 tz = datetime.timezone(datetime.timedelta(hours=-5))
 CURRENT_DATE = date.today()
-update_time = datetime.time(hour=00, minute=37, tzinfo=tz)
+update_time = datetime.time(hour=00, minute=1, tzinfo=tz)
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
@@ -27,7 +27,7 @@ def run_bot():
             page_url = cid.page_url
             image_url_comp = cid.image_url_comp
             blurb = cid.blurb
-            embed = discord.Embed(title="Wikipedia Picture of the Day",
+            embed = discord.Embed(title="New Wikipedia Picture of the Day!",
                                   url=page_url,
                                   description=blurb,
                                   color=0xff8585, )
@@ -64,7 +64,7 @@ def run_bot():
         blurb = cid.blurb
         print("Daily command called, stored image being displayed: " + image_url_comp)
 
-        embed = discord.Embed(title="Wikipedia Picture of the Day",
+        embed = discord.Embed(title="Wikipedia Picture of the Day!",
                               url=page_url,
                               description=blurb,
                               color=0xff8585, )
