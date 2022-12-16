@@ -10,7 +10,6 @@ import scheduledtasks as st
 tz = datetime.timezone(datetime.timedelta(hours=-5))
 CURRENT_DATE = date.today()
 update_time = datetime.time(hour=00, minute=1, tzinfo=tz)
-target_channel_id = 1040730331264856207
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
@@ -33,7 +32,11 @@ def run_bot():
                                   description=blurb,
                                   color=0xff8585, )
             embed.set_image(url=image_url_comp)
-            message_channel = bot.get_channel(target_channel_id)
+            for guild in bot.guilds:
+                for channel in guild.text_channels:
+                    if channel.permissions_for(guild.me).send_messages:
+                        message_channel = channel
+                        break
             await message_channel.send(embed=embed)
 
         @update_and_send_potd.before_loop
@@ -42,7 +45,6 @@ def run_bot():
             print("Finished waiting")
 
     bot = MyBot(command_prefix="^", intents=discord.Intents.all())
-    # client = discord.Client(command_prefix="^", intents=discord.Intents.all())
 
     @bot.event
     async def on_ready():
