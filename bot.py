@@ -9,7 +9,7 @@ import scheduledtasks as st
 
 tz = datetime.timezone(datetime.timedelta(hours=-5))
 CURRENT_DATE = date.today()
-update_time = datetime.time(hour=00, minute=1, tzinfo=tz)
+update_time = datetime.time(hour=00, minute=15, tzinfo=tz)
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
@@ -22,6 +22,7 @@ def run_bot():
 
         @tasks.loop(time=update_time)
         async def update_and_send_potd(self):
+            global message_channel
             print("Running scheduled bot task: updating and sending the POTD")
             st.store_new_potd()
             page_url = cid.page_url
