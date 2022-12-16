@@ -43,7 +43,7 @@ def run_bot():
                                   color=0xff8585, )
             embed.set_image(url=image_url_comp)
             embed.add_field(name="Description", value=blurb)
-            embed.set_footer(text="Image date" + image_date)
+            embed.set_footer(text="Image date: " + image_date)
             for guild in bot.guilds:
                 for channel in guild.text_channels:
                     if channel.permissions_for(guild.me).send_messages:
@@ -87,7 +87,7 @@ def run_bot():
                               color=0xff8585, )
         embed.set_image(url=image_url_comp)
         embed.add_field(name="Description", value=blurb)
-        embed.set_footer(text="Image date" + image_date)
+        embed.set_footer(text="Image date: " + image_date)
         await ctx.reply(embed=embed)
 
     # Starts the bot (for real)
