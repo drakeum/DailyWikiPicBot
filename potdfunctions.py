@@ -5,7 +5,8 @@ SESSION = requests.Session()
 ENDPOINT = "https://en.wikipedia.org/w/api.php"
 ENDPOINT2 = "https://commons.wikimedia.org/w/api.php"
 
-# Retrieves the current stored POTD and returns a JSON containing
+
+# Retrieves the current POTD from Wikipedia and returns a JSON containing
 # the filename, POTD page url, file page url, image upload date, and the image's blurb
 def fetch_potd(current_date):
     date_i = current_date.isoformat()
@@ -28,7 +29,7 @@ def fetch_potd(current_date):
         "filename": filename,
         "image_page_url": image_page_url,
         "image_src": fetch_image_src(filename),
-        "date": date_i,
+        "image_date": fetch_image_upload_date(filename),
         "blurb": fetch_potd_blurb(filename)
     }
 
@@ -56,9 +57,9 @@ def fetch_image_src(filename):
     make_picture_resolution_1920(image_url)
     return image_url
 
+
 # Returns the blurb (or description) of an image on Wikipedia
 def fetch_potd_blurb(filename):
-
     params = {
         "action": "query",
         "format": "json",
@@ -71,8 +72,27 @@ def fetch_potd_blurb(filename):
     response = SESSION.get(url=ENDPOINT2, params=params)
     data = response.json()
     description_raw = data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]["ImageDescription"]["value"]
+    print(data)
     description = htmlparser.strip_tags(description_raw)
     return description
+
+
+def fetch_image_upload_date(filename):
+    params = {
+        "action": "query",
+        "format": "json",
+        "formatversion": "2",
+        "prop": "imageinfo",
+        "iiprop": "extmetadata",
+        "titles": filename
+    }
+
+    response = SESSION.get(url=ENDPOINT, params=params)
+    data = response.json()
+    # print(data)
+    date_raw = data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]["DateTimeOriginal"]["value"]
+    # print(date_raw)
+    return date_raw
 
 
 # Transforms an image url on Wikipedia to the same one, but with some stuff added to have

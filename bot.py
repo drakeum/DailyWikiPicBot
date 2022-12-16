@@ -37,11 +37,13 @@ def run_bot():
             page_url = cid.page_url
             image_url_comp = cid.image_url_comp
             blurb = cid.blurb
+            image_date = cid.image_date
             embed = discord.Embed(title="New Wikipedia Picture of the Day!",
                                   url=page_url,
-                                  description=blurb,
                                   color=0xff8585, )
             embed.set_image(url=image_url_comp)
+            embed.add_field(name="Description", value=blurb)
+            embed.set_footer(image_date)
             for guild in bot.guilds:
                 for channel in guild.text_channels:
                     if channel.permissions_for(guild.me).send_messages:
@@ -77,13 +79,15 @@ def run_bot():
         page_url = cid.page_url
         image_url_comp = cid.image_url_comp
         blurb = cid.blurb
+        image_date = cid.image_date
         print("Daily command called, stored image being displayed: " + image_url_comp)
 
         embed = discord.Embed(title="Wikipedia Picture of the Day!",
                               url=page_url,
-                              description=blurb,
                               color=0xff8585, )
         embed.set_image(url=image_url_comp)
+        embed.add_field(name="Description", value=blurb)
+        embed.set_footer(image_date)
         await ctx.reply(embed=embed)
 
     # Starts the bot (for real)
