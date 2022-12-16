@@ -5,6 +5,7 @@ import potdfunctions as pf
 CURRENT_DATE = date.today()
 
 
+# Fetches the POTD from Wikipedia and stores it in variables
 def store_new_potd():
     data = pf.fetch_potd(CURRENT_DATE)
     image_url = data['image_src']

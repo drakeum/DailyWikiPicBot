@@ -5,7 +5,8 @@ SESSION = requests.Session()
 ENDPOINT = "https://en.wikipedia.org/w/api.php"
 ENDPOINT2 = "https://commons.wikimedia.org/w/api.php"
 
-
+# Retrieves the current stored POTD and returns a JSON containing
+# the filename, POTD page url, file page url, image upload date, and the image's blurb
 def fetch_potd(current_date):
     date_i = current_date.isoformat()
     title = "Template:POTD_protected/" + date_i
@@ -34,6 +35,7 @@ def fetch_potd(current_date):
     return image_data
 
 
+# Returns the direct url of an image file on Wikipedia that is set to a resolution of 1920-x pixels
 def fetch_image_src(filename):
     params = {
         "action": "query",
@@ -54,7 +56,7 @@ def fetch_image_src(filename):
     make_picture_resolution_1920(image_url)
     return image_url
 
-
+# Returns the blurb (or description) of an image on Wikipedia
 def fetch_potd_blurb(filename):
 
     params = {
@@ -73,6 +75,8 @@ def fetch_potd_blurb(filename):
     return description
 
 
+# Transforms an image url on Wikipedia to the same one, but with some stuff added to have
+# the picture be 1920-x pixels (this is so that Discord will embed it instantly (hopefully))
 def make_picture_resolution_1920(url):
     # print(url + '\n')
     after_commons_index = url.find('commons') + 8

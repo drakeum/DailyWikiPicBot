@@ -7,19 +7,29 @@ import currentimagedata as cid
 from dotenv import load_dotenv
 import scheduledtasks as st
 
+# Create an EST timezone
 tz = datetime.timezone(datetime.timedelta(hours=-5))
+# Store the current date
 CURRENT_DATE = date.today()
+# Set the time the bot will update the POTD
 update_time = datetime.time(hour=00, minute=1, tzinfo=tz)
+# Load environment variables
 load_dotenv()
+# Get authorization token from env variables
 TOKEN = os.getenv('TOKEN')
 
 
+# Function to start the bot
 def run_bot():
+    # Set up timed loop functions
     class MyBot(commands.Bot):
         async def setup_hook(self):
             print("Bot starting")
             self.update_and_send_potd.start()
 
+        # Update the POTD and send it. Updates at the time specified in "time="
+        # Sends the message in the first text channel in a server that the bot has permissions to
+        # send messages in
         @tasks.loop(time=update_time)
         async def update_and_send_potd(self):
             print("Running scheduled bot task: updating and sending the POTD")
@@ -40,13 +50,16 @@ def run_bot():
                         await message_channel.send(embed=embed)
                         break
 
+        # Makes it so the timer loop starts after the bot is ready
         @update_and_send_potd.before_loop
         async def before(self):
             await bot.wait_until_ready()
             print("Finished waiting")
 
+    # Creates instance of the bot that uses the prefix "^" for commands
     bot = MyBot(command_prefix="^", intents=discord.Intents.all())
 
+    # Updates POTD at launch and establishes slash command sync
     @bot.event
     async def on_ready():
         print("Bot is now running")
@@ -57,6 +70,8 @@ def run_bot():
         except Exception as e:
             print(e)
 
+    # Creates the "daily" command. WHen a user executes this command, the bot will reply with
+    # the current POTD
     @bot.hybrid_command(name="daily", description="Shows today's Wikipedia daily picture.")
     async def daily(ctx: commands.Context):
         page_url = cid.page_url
@@ -71,4 +86,5 @@ def run_bot():
         embed.set_image(url=image_url_comp)
         await ctx.reply(embed=embed)
 
+    # Starts the bot (for real)
     bot.run(TOKEN)
