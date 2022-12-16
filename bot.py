@@ -22,7 +22,6 @@ def run_bot():
 
         @tasks.loop(time=update_time)
         async def update_and_send_potd(self):
-            global message_channel
             print("Running scheduled bot task: updating and sending the POTD")
             st.store_new_potd()
             page_url = cid.page_url
