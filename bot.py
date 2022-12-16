@@ -31,7 +31,7 @@ def run_bot():
             embed = discord.Embed(title="Wikipedia Picture of the Day",
                                   url=page_url,
                                   description=blurb,
-                                  color=0xFF5733, )
+                                  color=0xff8585, )
             embed.set_image(url=image_url_comp)
             message_channel = bot.get_channel(target_channel_id)
             await message_channel.send(embed=embed)
@@ -64,7 +64,7 @@ def run_bot():
         embed = discord.Embed(title="Wikipedia Picture of the Day",
                               url=page_url,
                               description=blurb,
-                              color=0xFF5733, )
+                              color=0xff8585, )
         embed.set_image(url=image_url_comp)
         await interaction.response.send_message(embed=embed)
 
