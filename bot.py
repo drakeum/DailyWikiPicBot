@@ -9,7 +9,7 @@ import scheduledtasks as st
 
 tz = datetime.timezone(datetime.timedelta(hours=-5))
 CURRENT_DATE = date.today()
-update_time = datetime.time(hour=00, minute=28, tzinfo=tz)
+update_time = datetime.time(hour=00, minute=37, tzinfo=tz)
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
@@ -37,8 +37,8 @@ def run_bot():
                     if channel.permissions_for(guild.me).send_messages:
                         message_channel = channel
                         print("First channel found in guild " + guild.name)
+                        await message_channel.send(embed=embed)
                         break
-            await message_channel.send(embed=embed)
 
         @update_and_send_potd.before_loop
         async def before(self):
