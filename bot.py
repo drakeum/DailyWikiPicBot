@@ -1,18 +1,18 @@
 import discord
 from discord.ext import commands, tasks
 from datetime import date, datetime
-import datetime
+import datetime as dt
 import os
 import currentimagedata as cid
 from dotenv import load_dotenv
 import scheduledtasks as st
 
 # Create an EST timezone
-tz = datetime.timezone(datetime.timedelta(hours=-5))
+tz = dt.timezone(dt.timedelta(hours=-5))
 # Store the current date
 CURRENT_DATE = date.today()
 # Set the time the bot will update the POTD
-update_time = datetime.time(hour=8, minute=0, tzinfo=tz)
+update_time = dt.time(hour=8, minute=0, tzinfo=tz)
 # Load environment variables
 load_dotenv()
 # Get authorization token from env variables
