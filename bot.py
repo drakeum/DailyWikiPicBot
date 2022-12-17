@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands, tasks
-from datetime import date
+from datetime import date, datetime
 import datetime
 import os
 import currentimagedata as cid
@@ -81,7 +81,8 @@ def run_bot():
         blurb = cid.blurb
         image_date = cid.image_date
         print("Daily command called, stored image being displayed: " + image_url_comp)
-
+        print("Current time: " + CURRENT_DATE.isoformat() + " " + datetime.now().strftime(
+            "%H:%M:%S"))
         embed = discord.Embed(title="Wikipedia Picture of the Day!",
                               url=page_url,
                               color=0xff8585, )
