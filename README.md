@@ -2,9 +2,11 @@
 A Discord bot that posts the Wikipedia picture of the day (POTD), everyday
 
 # About
-This bot will automatically update and post the Wikipedia picture of the day once a day at 8:00AM EST (this can be changed, see config section below)
-The message will be posted in the first text-channel in the server that the bot has permission to send messages in
-Additionally, the current POTD can be viewed any time by using the slash command `/daily` or sending a message command `^daily` (the bot's prefix can be changed, see config section below)
+This bot will automatically update and post the Wikipedia picture of the day once a day at 8:00AM EST (this can be changed, see config section below).
+
+The message will be posted in the first text-channel in the server that the bot has permission to send messages in.
+
+Additionally, the current POTD can be viewed any time by using the slash command `/daily` or sending a message command `^daily` (the bot's prefix can be changed, see config section below).
 
 # Requirements and running the bot
 - Requires Python 3.9 or greater.
