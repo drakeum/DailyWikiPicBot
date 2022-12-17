@@ -15,6 +15,9 @@ Additionally, the current POTD can be viewed any time by using the slash command
 
 - In the .env file, replace "YOUR_TOKEN_HERE" with your Discord bot account's token. Don't include the parentheses.
 
+- If you don't know what a Discord bot account is or don't have one, watch [this](https://youtu.be/Gqurhm2QxA0?t=12) video up to 0:48
+
+
 ## Inviting to your server
 - To invite the bot to your server, go to your Discord bot account and make sure these boxes are checked off like in the image below
 ![Image of required intents](https://user-images.githubusercontent.com/47580914/208226855-93026a5c-a97c-4ba0-a128-4663192080c0.png)
