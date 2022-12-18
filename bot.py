@@ -12,7 +12,7 @@ tz = dt.timezone(dt.timedelta(hours=-5))
 # Store the current date
 CURRENT_DATE = date.today()
 # Set the time the bot will update the POTD
-update_time = dt.time(hour=8, minute=35, tzinfo=tz)
+update_time = dt.time(hour=10, minute=7)
 # Load environment variables
 load_dotenv()
 # Get authorization token from env variables
