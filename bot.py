@@ -83,7 +83,7 @@ def run_bot():
         print("Daily command called, stored image being displayed: " + image_url_comp)
         print("Current time: " + CURRENT_DATE.isoformat() + " " + datetime.now().strftime(
             "%H:%M:%S"))
-        print("Time until next update: " + MyBot.update_and_send_potd.next_iteration.strftime("%H:%M:%S"))
+
         embed = discord.Embed(title="Wikipedia Picture of the Day!",
                               url=page_url,
                               color=0xff8585, )
