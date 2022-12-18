@@ -80,7 +80,6 @@ def run_bot():
         image_date = cid.image_date
         print("Daily command called, stored image being displayed: " + image_url_comp)
         print("Current time: " + CURRENT_DATE.isoformat() + " " + datetime.now().strftime(
-            "%H:%M:%S") + ". Time until next update: " + MyBot.update_and_send_potd._get_next_sleep_time().strftime(
             "%H:%M:%S"))
 
         embed = discord.Embed(title="Wikipedia Picture of the Day!",
