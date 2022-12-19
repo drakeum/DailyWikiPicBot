@@ -10,7 +10,7 @@ import scheduledtasks as st
 # Store the current date
 CURRENT_DATE = date.today()
 # Set the time the bot will update the POTD
-update_time = dt.time(hour=5, minute=35)
+update_time = dt.time(hour=6, minute=00)
 # Load environment variables
 load_dotenv()
 # Get authorization token from env variables
