@@ -2,7 +2,7 @@
 A Discord bot that posts the Wikipedia picture of the day (POTD), everyday
 
 # About
-This bot will automatically update and post the Wikipedia picture of the day once a day at 8:00AM EST (this can be changed, see config section below).
+This bot will automatically update and post the Wikipedia picture of the day once a day at 12:00AM EST (this can be changed, see config section below).
 
 The message will be posted in the first text-channel in the server that the bot has permission to send messages in.
 
@@ -38,6 +38,6 @@ Then, copy the invite link made at the bottom and go to it. That is the link to 
 # Config
 A more intuitive solution for changing these is being worked on.
 ## Changing the auto-update/post time
-Open bot.py and edit the line `update_time = datetime.time(hour=8, minute=0, tzinfo=tz)`. This time is in EST. Change `hour=` to the hour (uses 24hr clock) and `minute` to the minute of the hour you want the bot to update and post at.
+Open bot.py and edit the line `update_time = datetime.time(hour=5, minute=0)`. This time is in UTC. Change `hour=` to the hour (uses 24hr clock) and `minute` to the minute of the hour you want the bot to update and post at.
 ## Changing the message command prefix
 Open bot.py and edit the like `bot = MyBot(command_prefix="^", intents=discord.Intents.all())`. Change `command_prefix=` to the prefix you want to use for message commands. Make sure to put in in quotation marks, like the default code line has.
