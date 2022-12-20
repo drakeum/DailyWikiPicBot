@@ -7,8 +7,6 @@ import currentimagedata as cid
 from dotenv import load_dotenv
 import scheduledtasks as st
 
-# Store the current date
-CURRENT_DATE = date.today()
 # Set the time the bot will update the POTD
 update_time = dt.time(hour=5, minute=00)
 # Load environment variables
@@ -74,6 +72,8 @@ def run_bot():
     # the current POTD
     @bot.hybrid_command(name="daily", description="Shows today's Wikipedia daily picture.")
     async def daily(ctx: commands.Context):
+        # Store the current date
+        CURRENT_DATE = date.today()
         page_url = cid.page_url
         image_url_comp = cid.image_url_comp
         blurb = cid.blurb
