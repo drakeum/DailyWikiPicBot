@@ -22,6 +22,7 @@ def run_bot():
         async def setup_hook(self):
             print("Bot starting")
             self.update_and_send_potd.start()
+            self.log_ping.start()
 
         # Update the POTD and send it. Updates at the time specified in "time="
         # Sends the message in the first text channel in a server that the bot has permissions to
@@ -54,6 +55,16 @@ def run_bot():
             await bot.wait_until_ready()
             print("Finished waiting")
 
+        # Loop to send a log message
+        @tasks.loop(hours=1)
+        async def log_ping(self):
+            print("Hourly ping, current time")
+
+        @log_ping.before_loop
+        async def before(self):
+            await bot.wait_until_ready()
+            print("Finished waiting")
+
     # Creates instance of the bot that uses the prefix "^" for commands
     bot = MyBot(command_prefix="^", intents=discord.Intents.all())
 
@@ -73,13 +84,13 @@ def run_bot():
     @bot.hybrid_command(name="daily", description="Shows today's Wikipedia daily picture.")
     async def daily(ctx: commands.Context):
         # Store the current date
-        CURRENT_DATE = date.today()
+        current_date = date.today()
         page_url = cid.page_url
         image_url_comp = cid.image_url_comp
         blurb = cid.blurb
         image_date = cid.image_date
         print("Daily command called, stored image being displayed: " + image_url_comp)
-        print("Current time: " + CURRENT_DATE.isoformat() + " " + datetime.now().strftime(
+        print("Current time: " + current_date.isoformat() + " " + datetime.now().strftime(
             "%H:%M:%S"))
 
         embed = discord.Embed(title="Wikipedia Picture of the Day!",
