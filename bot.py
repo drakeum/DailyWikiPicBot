@@ -58,7 +58,8 @@ def run_bot():
         # Loop to send a log message
         @tasks.loop(hours=1)
         async def log_ping(self):
-            print("Hourly ping, current time")
+            current_date = date.today()
+            print("Hourly ping, current time: + " + current_date + datetime.now().strftime("%H:%M:%S"))
 
         @log_ping.before_loop
         async def before(self):
