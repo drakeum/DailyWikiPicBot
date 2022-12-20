@@ -31,7 +31,7 @@ def run_bot():
             print("Running scheduled bot task: updating and sending the POTD")
             st.store_new_potd()
             page_url = cid.page_url
-            image_url_comp = cid.image_url_comp
+            image_url_comp = cid.image_url
             blurb = cid.blurb
             image_date = cid.image_date
             embed = discord.Embed(title="New Wikipedia Picture of the Day!",

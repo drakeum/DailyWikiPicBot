@@ -9,10 +9,9 @@ import potdfunctions as pf
 def store_new_potd():
     CURRENT_DATE = date.today()
     data = pf.fetch_potd(CURRENT_DATE)
-    image_url = data['image_src']
     cid.image_url = data['image_src']
     cid.page_url = data["image_page_url"]
-    cid.image_url_comp = pf.make_picture_resolution_1920(image_url)
+    cid.image_url_comp = data['image_src']
     cid.blurb = data['blurb']
     cid.image_date = data['image_date']
     print(

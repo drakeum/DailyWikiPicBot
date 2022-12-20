@@ -50,11 +50,13 @@ def fetch_image_src(filename):
     data = response.json()
     # print(data)
     page = next(iter(data["query"]["pages"].values()))
-    # print(page)
+    print(page)
     image_info = page["imageinfo"][0]
     # print(image_info)
     image_url = image_info["url"]
-    make_picture_resolution_1920(image_url)
+    image_url = make_picture_resolution_1920(image_url)
+
+    print(image_url)
     return image_url
 
 
@@ -72,7 +74,7 @@ def fetch_potd_blurb(filename):
     response = SESSION.get(url=ENDPOINT2, params=params)
     data = response.json()
     description_raw = data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]["ImageDescription"]["value"]
-    print(data)
+    # print(data)
     description = htmlparser.strip_tags(description_raw)
     return description
 
@@ -114,5 +116,7 @@ def make_picture_resolution_1920(url):
     # print(only_image)
 
     final_url = up_to_commons_sub + thumb + between_thumb_and_image + only_image + "/1920px-" + only_image
+    if ".webm" in final_url:
+        return final_url + ".jpg"
     # print(final_url)
     return final_url
