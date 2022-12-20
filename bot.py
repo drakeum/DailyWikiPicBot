@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 import scheduledtasks as st
 
 # Set the time the bot will update the POTD
-update_time = dt.time(hour=5, minute=00)
+update_time = dt.time(hour=5, minute=30)
 # Load environment variables
 load_dotenv()
 # Get authorization token from env variables
