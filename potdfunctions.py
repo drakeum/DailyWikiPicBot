@@ -94,7 +94,8 @@ def fetch_image_upload_date(filename):
     # print(data)
     date_raw = data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]["DateTimeOriginal"]["value"]
     # print(date_raw)
-    return date_raw
+    date = htmlparser.strip_tags(date_raw)
+    return date
 
 
 # Transforms an image url on Wikipedia to the same one, but with some stuff added to have
