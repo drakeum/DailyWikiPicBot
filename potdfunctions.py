@@ -94,11 +94,14 @@ def fetch_image_upload_date(filename):
 
     response = SESSION.get(url=ENDPOINT, params=params)
     data = response.json()
-    print(data)
+    # print(data)
     date_raw = data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]["DateTimeOriginal"]["value"]
-    print(date_raw)
-    date = htmlparser.strip_tags(date_raw)
-    return date
+    # print(date_raw)
+    div_index = date_raw.find("<div")
+    if div_index == -1:
+        return date_raw
+    date_no_div = date_raw[:div_index]
+    return date_no_div
 
 
 # Transforms an image url on Wikipedia to the same one, but with some stuff added to have
