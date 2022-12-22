@@ -54,6 +54,9 @@ def fetch_image_src(filename):
     image_info = page["imageinfo"][0]
     # print(image_info)
     image_url = image_info["url"]
+    if image_url[-4:] == ".gif":
+        print("Image is a .gif file")
+        return image_url
     image_url = make_picture_resolution_1920(image_url)
 
     print(image_url)
@@ -91,9 +94,9 @@ def fetch_image_upload_date(filename):
 
     response = SESSION.get(url=ENDPOINT, params=params)
     data = response.json()
-    # print(data)
+    print(data)
     date_raw = data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]["DateTimeOriginal"]["value"]
-    # print(date_raw)
+    print(date_raw)
     date = htmlparser.strip_tags(date_raw)
     return date
 
@@ -118,6 +121,7 @@ def make_picture_resolution_1920(url):
 
     final_url = up_to_commons_sub + thumb + between_thumb_and_image + only_image + "/1920px-" + only_image
     if ".webm" in final_url:
+        print("Image is a .webm file")
         return final_url + ".jpg"
     # print(final_url)
     return final_url
