@@ -32,7 +32,7 @@ def fetch_potd(current_date):
         "image_date": fetch_image_upload_date(filename),
         "blurb": fetch_potd_blurb(filename)
     }
-
+    print("POTD fetched")
     return image_data
 
 
@@ -50,7 +50,7 @@ def fetch_image_src(filename):
     data = response.json()
     # print(data)
     page = next(iter(data["query"]["pages"].values()))
-    print(page)
+    # print(page)
     image_info = page["imageinfo"][0]
     # print(image_info)
     image_url = image_info["url"]
@@ -59,7 +59,7 @@ def fetch_image_src(filename):
         return image_url
     image_url = make_picture_resolution_1920(image_url)
 
-    print(image_url)
+    print("Image src url fetched: " + image_url)
     return image_url
 
 
@@ -76,9 +76,14 @@ def fetch_potd_blurb(filename):
 
     response = SESSION.get(url=ENDPOINT2, params=params)
     data = response.json()
-    description_raw = data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]["ImageDescription"]["value"]
     # print(data)
+    if "ImageDescription" in data:
+        description_raw = data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]["ImageDescription"]["value"]
+    else:
+        print("Image has no description")
+        description_raw = data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]["ObjectName"]["value"]
     description = htmlparser.strip_tags(description_raw)
+    print("Image description fetched: " + description)
     return description
 
 
@@ -101,6 +106,7 @@ def fetch_image_upload_date(filename):
     if div_index == -1:
         return date_raw
     date_no_div = date_raw[:div_index]
+    print("Image date fetched: " + date_no_div)
     return date_no_div
 
 

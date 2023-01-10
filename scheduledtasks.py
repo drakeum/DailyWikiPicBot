@@ -5,9 +5,11 @@ import potdfunctions as pf
 
 # Fetches the POTD from Wikipedia and stores it in variables
 def store_new_potd():
+    print("Storing new daily image")
     current_date = date.today()
     data = pf.fetch_potd(current_date)
     cid.image_url = data['image_src']
+    print("Scheduled task image url:" + data['image_src'])
     cid.page_url = data["image_page_url"]
     cid.image_url_comp = data['image_src']
     cid.blurb = data['blurb']
