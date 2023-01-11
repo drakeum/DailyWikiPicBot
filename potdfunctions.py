@@ -84,6 +84,8 @@ def fetch_potd_blurb(filename):
         description_raw = data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]["ObjectName"]["value"]
     description = htmlparser.strip_tags(description_raw)
     print("Image description fetched: " + description)
+    if len(description) > 1024:
+        description = "The description for this POTD is so long that it won't fit in an embed! Click the link to the image to see it."
     return description
 
 
