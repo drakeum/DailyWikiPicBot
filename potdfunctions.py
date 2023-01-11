@@ -77,7 +77,7 @@ def fetch_potd_blurb(filename):
     response = SESSION.get(url=ENDPOINT2, params=params)
     data = response.json()
     # print(data)
-    if "ImageDescription" in data:
+    if "ImageDescription" in data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]:
         description_raw = data["query"]["pages"][0]["imageinfo"][0]["extmetadata"]["ImageDescription"]["value"]
     else:
         print("Image has no description")
