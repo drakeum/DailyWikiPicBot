@@ -1,5 +1,5 @@
-# DailyWikiPicBot
-A Discord bot that posts the Wikipedia picture of the day (POTD), everyday
+# [ABANDONED] DailyWikiPicBot
+A Discord bot that posts the Wikipedia picture of the day (POTD), everyday. This project has been abandoned and will not recieve further updates from me.
 
 # About
 This bot will automatically update and post the Wikipedia picture of the day once a day (the timing for this this can be changed, see config section below).
